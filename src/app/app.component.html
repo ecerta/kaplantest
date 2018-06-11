@@ -1,20 +1,47 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<h1>Moveable List</h1>
 
+<!--I included instructions at a low grade level for reading so users with cognitive disabilites can use this more easily-->
+<p>Click on an item to select it. Then, click on the up or down buttons to move that item up or down in the list.</p>
+<p>If you'd like to reset the list, click the reset button.</p>
+<div class="row">
+  <div class="column">
+    <span aria-live="assertive" class="assistive-text">
+      <span *ngIf="selectedItemIndex >= 0">
+        The active item is {{dataArray[selectedItemIndex]}}.
+      </span>
+    </span>
+    <ul>
+      <!-- One of the more infuriating aspects of new angular is that (click) does not pass over to keydown.enter or
+      keydown.space, nor does it enter the option in tabbing order, hence the repetition. -->
+      <li *ngFor="let content of dataArray; let i = index"
+      class="item"
+      [ngClass]="{'active': selectedItemIndex === i}"
+      (click)="selectedItemIndex = i"
+      (keydown.enter)="selectedItemIndex = i"
+      (keydown.space)="selectedItemIndex = i"
+      tabindex="0">
+        {{content}}
+      </li>
+    </ul>
+  </div>
+  <div class="column button-column">
+    <button
+    (click)="reorderItems(selectedItemIndex, 'up')"
+    [disabled]="selectedItemIndex <= 0">
+      <img [ngClass]="{'disabled-grey': selectedItemIndex <= 0}"
+      src="assets/up-arrow-key.png"
+      alt="Move selected item up one place in the list">
+    </button>
+    <br>
+    <button
+    (click)="reorderItems(selectedItemIndex, 'down')"
+    [disabled]="selectedItemIndex >= dataArray.length - 1 || selectedItemIndex < 0">
+      <img [ngClass]="{'disabled-grey': selectedItemIndex >= dataArray.length - 1 || selectedItemIndex < 0}"
+      src="assets/expand-button.png"
+      alt="Move selected item down one place in the list">
+    </button>
+  </div>
+</div>
+<button (click)="resetItems()">RESET</button>
+
+<div>Icons made by <a href="https://www.flaticon.com/authors/google" title="Google">Google</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>

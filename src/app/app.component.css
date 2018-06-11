@@ -1,0 +1,45 @@
+.item {
+  padding: 5px;
+  border: 1px solid black;
+  margin-bottom: 10px;
+  width: 100px;
+  background-color: lightgrey;
+  list-style-type: none;
+}
+
+.active {
+  background-color: blue;
+  color: white;
+}
+
+.column {
+  float: left;
+  width: 30%;
+}
+
+.button-column {
+  margin-top: 16px;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.disabled-grey {
+  opacity: .4;
+}
+
+.assistive-text {
+  border: 0;
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute !important;
+  width: 1px;
+  word-wrap: normal !important;
+}

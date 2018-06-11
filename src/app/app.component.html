@@ -19,6 +19,8 @@
       (click)="selectedItemIndex = i"
       (keydown.enter)="selectedItemIndex = i"
       (keydown.space)="selectedItemIndex = i"
+      (keydown.ArrowUp)="reorderItems(selectedItemIndex, 'up')"
+      (keydown.ArrowDown)="reorderItems(selectedItemIndex, 'down')"
       tabindex="0">
         {{content}}
       </li>
